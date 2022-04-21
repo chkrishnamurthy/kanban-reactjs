@@ -29,7 +29,7 @@ const initialCards = Array.from({ length: 7 }).map(() => ({
 }));
 
 
-const initialColumns = ["TODO", "Doing", "Done"].map((title, i) => (
+const initialColumns = ["To do", "Development", "Testing","Done"].map((title, i) => (
   {
   id: _columnId++,
   title,
@@ -54,7 +54,8 @@ class App extends Component {
   state = {
     cards: initialCards,
     columns: initialColumns,
-    searchText: ""
+    searchText: "",
+    searchStatus:"All"
   };
 
   addColumn = (_title) => {
@@ -103,21 +104,42 @@ class App extends Component {
     }));
   };
 
-  handleChange = (e) => {
-    const value = e.target.value.toLowerCase();
-    this.setState(() => ({
+  nameSearch = (e) => {
+     this.setState(() => ({
       ...this.state,
-      searchText: value
+      searchText: e.target.value.toLowerCase()
     }));
   };
+
+  statusSearchHandler = (e)=>{
+    // console.log(e.target.value);
+    this.setState(() => ({
+      ...this.state,
+      searchStatus: e.target.value
+    }));
+  }
+
   render() {
     return (
      
       <div>
       
+      <div className="search-input-div">
+        <input placeholder="Search Card"  onChange={this.nameSearch}  className="search-input" type='text'  />
+       
+
+            <select class="classic" value={this.state.searchStatus} onChange={this.statusSearchHandler}>
+            <option>All</option>
+            <option>To do</option>
+            <option>Development</option>
+            <option>Testing</option>
+            <option>Done</option>
+</select>
+     
+      </div>
         
       
-        <input name="search" onChange={this.handleChange} />
+        
         <Board
           cards={this.state.cards}
           columns={this.state.columns}
@@ -125,6 +147,7 @@ class App extends Component {
           addCard={this.addCard}
           // addColumn={this.addColumn}
           searchText={this.state.searchText}
+          allowedColums={this.state.searchStatus}
         />
       </div>
     );
