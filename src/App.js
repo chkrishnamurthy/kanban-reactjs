@@ -125,6 +125,8 @@ class App extends Component {
       <div>
       
       <div className="search-input-div">
+        <span className="heading">Kanban Board</span>
+
         <input placeholder="Search Card"  onChange={this.nameSearch}  className="search-input" type='text'  />
        
 
