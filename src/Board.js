@@ -12,7 +12,7 @@ export function Board({
   allowedColums = "All"
 }) {
   return (
-    <div className="Board">
+    <div className="Board row">
       {columns
         .filter(
           (c) => allowedColums === "All" || c.title.includes(allowedColums)

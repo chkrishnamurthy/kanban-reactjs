@@ -4,12 +4,12 @@ import HTML5Backend from "react-dnd-html5-backend";
 import _ from "lodash";
 import { Board } from "./Board";
 
-let _columnId = 0;
-let _cardId = 0;
+let columnId = 0;
+let cardId = 0;
 
 // const initialCards = Array.from({ length: 9 }).map(() => ({
-//   id: ++_cardId,
-//   title: `Card ${_cardId}`
+//   id: ++cardId,
+//   title: `Card ${cardId}`
 // }));
 
 // const initialCards = [
@@ -24,21 +24,21 @@ let _cardId = 0;
 // ]
 
 const initialCards = Array.from({ length: 7 }).map(() => ({
-  id: ++_cardId,
-  title: `Card ${_cardId}`
+  id: ++cardId,
+  title: `Card ${cardId}`
 }));
 
 
 const initialColumns = ["To do", "Development", "Testing","Done"].map((title, i) => (
   {
-  id: _columnId++,
+  id: columnId++,
   title,
   cardIds: initialCards.slice(i * 3, i * 3 + 3).map((card) => card.id),
   
 }),);
 
 // const initialColumns = ["To Do", "Development", "Testing","Done"].map((title, i) => ({
-//   id: _columnId++,
+//   id: columnId++,
 //   title,
 //   cardIds: initialCards.slice(i * 3, i * 3 + 3).map((card) => card.id)
 // }));
@@ -63,7 +63,7 @@ class App extends Component {
     if (!title) return;
 
     const newColumn = {
-      id: ++_columnId,
+      id: ++columnId,
       title,
       cardIds: []
     };
@@ -76,7 +76,7 @@ class App extends Component {
     const title = _title.trim();
     if (!title) return;
 
-    const newCard = { id: ++_cardId, title };
+    const newCard = { id: ++cardId, title };
     this.setState((state) => ({
       cards: [...state.cards, newCard],
       columns: state.columns.map((column) =>
@@ -124,11 +124,15 @@ class App extends Component {
      
       <div>
       
-      <div className="search-input-div">
+      <div className="row search-input-div" >
+        <div className="col-md-3">
         <span className="heading">Kanban Board</span>
-
+        </div>
+        <div className="col-md-6">
         <input placeholder="Search Card"  onChange={this.nameSearch}  className="search-input" type='text'  />
-            <select class="classic" placeholder="Select" value={this.state.searchStatus} onChange={this.statusSearchHandler}>
+        </div>
+        <div className="col-md-3">
+           <select class="classic" placeholder="Select" value={this.state.searchStatus} onChange={this.statusSearchHandler}>
             <option value="" className="dropdown_option" disabled selected hidden>Status</option>
             <option>All</option>
             <option>To do</option>
@@ -136,11 +140,12 @@ class App extends Component {
             <option>Testing</option>
             <option>Done</option>
 </select>
-      </div>
+</div>  </div>
         
       
         
         <Board
+          
           cards={this.state.cards}
           columns={this.state.columns}
           moveCard={this.moveCard}
@@ -148,6 +153,7 @@ class App extends Component {
           searchText={this.state.searchText}
           allowedColums={this.state.searchStatus}
         />
+  
       </div>
     );
   }

@@ -14,12 +14,12 @@ body{
 }
 
 .Column {
-  display: inline-block;
+  /* display: inline-block; */
   vertical-align: top;
   width: 225px;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 5px;
-  margin-right: 20px;
+  margin-top: 20px;
   background: #ebecf0;
   color: #bfdbf7;
 
@@ -74,7 +74,7 @@ body{
 }
 
 .search-input{
-  width: 50%;
+  width: 100%;
   margin: auto;
   padding: 12px;
   margin-right: 10px;
@@ -157,7 +157,8 @@ select.classic:focus {
 
 }
 
-select .dropdown_option{
-  color: red !important;
-  background-color: red;
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
 }
