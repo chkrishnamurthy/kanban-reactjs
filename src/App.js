@@ -92,7 +92,7 @@ class App extends Component {
            <select class="classic" placeholder="Select" value={this.state.searchStatus} onChange={this.statusSearchHandler}>
             <option value="" className="dropdown_option" disabled selected hidden>Status</option>
             <option>All</option>
-            <option>To do</option>
+            <option>To Do</option>
             <option>Development</option>
             <option>Testing</option>
             <option>Done</option>
