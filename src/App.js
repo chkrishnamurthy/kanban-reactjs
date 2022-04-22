@@ -4,51 +4,23 @@ import HTML5Backend from "react-dnd-html5-backend";
 import _ from "lodash";
 import { Board } from "./Board";
 
-let columnId = 0;
-let cardId = 0;
 
-// const initialCards = Array.from({ length: 9 }).map(() => ({
-//   id: ++cardId,
-//   title: `Card ${cardId}`
-// }));
+const initialCards = [
+  {id: 1, title: 'Helpdesk Call AA999'},
+ {id: 2, title: 'Helpdesk Call BB999'},
+ {id: 3, title: 'Helpdesk Call CC999'},
+ {id: 4, title: 'Helpdesk Call EE999'},
+ {id: 5, title: 'Helpdesk Call DD999'},
+{id: 6, title: 'Helpdesk Call FF999'},
+ {id: 7, title: 'Helpdesk Call GG999'},
+]
 
-// const initialCards = [
-//   {id: 1, title: 'Helpdesk Call AA999'},
-//  {id: 2, title: 'Helpdesk Call BB999'},
-//  {id: 3, title: 'Helpdesk Call CC999'},
-//  {id: 4, title: 'Helpdesk Call EE999'},
-//  {id: 5, title: 'Helpdesk Call DD999'},
-// {id: 6, title: 'Helpdesk Call FF999'},
-//  {id: 7, title: 'Helpdesk Call GG999'},
-
-// ]
-
-const initialCards = Array.from({ length: 7 }).map(() => ({
-  id: ++cardId,
-  title: `Card ${cardId}`
-}));
-
-
-const initialColumns = ["To do", "Development", "Testing","Done"].map((title, i) => (
-  {
-  id: columnId++,
-  title,
-  cardIds: initialCards.slice(i * 3, i * 3 + 3).map((card) => card.id),
-  
-}),);
-
-// const initialColumns = ["To Do", "Development", "Testing","Done"].map((title, i) => ({
-//   id: columnId++,
-//   title,
-//   cardIds: initialCards.slice(i * 3, i * 3 + 3).map((card) => card.id)
-// }));
-
-// const initialColumns = [
-//   {id: 1, title: 'To Do', cardIds: [1,2]},
-//   {id: 2, title: 'Development', cardIds: [3,4]},
-//   {id: 3, title: 'Testing', cardIds: [5]},
-//   {id: 4, title: 'Done', cardIds: [6,7]},
-// ]
+const initialColumns = [
+  {id: 1, title: 'To Do', cardIds: [1,2]},
+  {id: 2, title: 'Development', cardIds: [3,4]},
+  {id: 3, title: 'Testing', cardIds: [5]},
+  {id: 4, title: 'Done', cardIds: [6,7]},
+]
 
 class App extends Component {
   state = {
@@ -58,25 +30,13 @@ class App extends Component {
     searchStatus:""
   };
 
-  addColumn = (_title) => {
-    const title = _title.trim();
-    if (!title) return;
-
-    const newColumn = {
-      id: ++columnId,
-      title,
-      cardIds: []
-    };
-    this.setState((state) => ({
-      columns: [...state.columns, newColumn]
-    }));
-  };
 
   addCard = (columnId, _title) => {
     const title = _title.trim();
     if (!title) return;
 
-    const newCard = { id: ++cardId, title };
+    const newCard = { id: this.state.cards.length+1, title };
+    console.log(newCard);
     this.setState((state) => ({
       cards: [...state.cards, newCard],
       columns: state.columns.map((column) =>
@@ -92,12 +52,10 @@ class App extends Component {
       columns: state.columns.map((column) => ({
         ...column,
         cardIds: _.flowRight(
-          // 2) If this is the destination column, insert the cardId.
           (ids) =>
             column.id === destColumnId
               ? [...ids.slice(0, index), cardId, ...ids.slice(index)]
               : ids,
-          // 1) Remove the cardId for all columns
           (ids) => ids.filter((id) => id !== cardId)
         )(column.cardIds)
       }))
@@ -112,7 +70,6 @@ class App extends Component {
   };
 
   statusSearchHandler = (e)=>{
-    // console.log(e.target.value);
     this.setState(() => ({
       ...this.state,
       searchStatus: e.target.value
@@ -123,10 +80,10 @@ class App extends Component {
     return (
      
       <div>
-      
-      <div className="row search-input-div" >
-        <div className="col-md-3">
-        <span className="heading">Kanban Board</span>
+        <div className="row search-input-div" >
+        <div className="col-md-2
+        ">
+        <span className="heading">Kanban</span>
         </div>
         <div className="col-md-6">
         <input placeholder="Search Card"  onChange={this.nameSearch}  className="search-input" type='text'  />
@@ -145,7 +102,6 @@ class App extends Component {
       
         
         <Board
-          
           cards={this.state.cards}
           columns={this.state.columns}
           moveCard={this.moveCard}
@@ -153,7 +109,6 @@ class App extends Component {
           searchText={this.state.searchText}
           allowedColums={this.state.searchStatus}
         />
-  
       </div>
     );
   }

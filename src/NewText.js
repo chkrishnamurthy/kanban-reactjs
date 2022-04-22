@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-export const TextForm = (props)=>{
+export const NewText = (props)=>{
     const onSubmit =(event)=>{
         const form = event.target;
         event.preventDefault();

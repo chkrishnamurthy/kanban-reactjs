@@ -33,7 +33,7 @@ body{
 }
 
 .Card {
-  padding: 15px;
+  padding: 18px;
   background: #F4F5F7;
   color: #172b4d;
   border-radius: 5px;
@@ -157,8 +157,19 @@ select.classic:focus {
 
 }
 
-@media only screen and (max-width: 600px) {
+.col-md-2{
+  margin-top: 10px;
+
+}
+
+@media only screen and (max-width: 775px) {
   body {
     background-color: lightblue;
   }
+  .classic{
+    margin:10px
+  }
 }
+
+
+
