@@ -163,9 +163,7 @@ select.classic:focus {
 }
 
 @media only screen and (max-width: 775px) {
-  body {
-    background-color: lightblue;
-  }
+  
   .classic{
     margin:10px
   }

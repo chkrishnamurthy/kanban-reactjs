@@ -34,8 +34,7 @@ class App extends Component {
   addCard = (columnId, _title) => {
     const title = _title.trim();
     if (!title) return;
-
-    const newCard = { id: this.state.cards.length+1, title };
+     const newCard = { id: this.state.cards.length+1, title };
     console.log(newCard);
     this.setState((state) => ({
       cards: [...state.cards, newCard],
@@ -70,6 +69,7 @@ class App extends Component {
   };
 
   statusSearchHandler = (e)=>{
+    console.log("Krishna");
     this.setState(() => ({
       ...this.state,
       searchStatus: e.target.value
