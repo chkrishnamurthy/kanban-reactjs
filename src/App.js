@@ -55,7 +55,7 @@ class App extends Component {
     cards: initialCards,
     columns: initialColumns,
     searchText: "",
-    searchStatus:"All"
+    searchStatus:""
   };
 
   addColumn = (_title) => {
@@ -128,16 +128,14 @@ class App extends Component {
         <span className="heading">Kanban Board</span>
 
         <input placeholder="Search Card"  onChange={this.nameSearch}  className="search-input" type='text'  />
-       
-
-            <select class="classic" value={this.state.searchStatus} onChange={this.statusSearchHandler}>
+            <select class="classic" placeholder="Select" value={this.state.searchStatus} onChange={this.statusSearchHandler}>
+            <option value="" className="dropdown_option" disabled selected hidden>Status</option>
             <option>All</option>
             <option>To do</option>
             <option>Development</option>
             <option>Testing</option>
             <option>Done</option>
 </select>
-     
       </div>
         
       
@@ -147,7 +145,6 @@ class App extends Component {
           columns={this.state.columns}
           moveCard={this.moveCard}
           addCard={this.addCard}
-          // addColumn={this.addColumn}
           searchText={this.state.searchText}
           allowedColums={this.state.searchStatus}
         />

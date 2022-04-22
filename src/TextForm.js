@@ -1,23 +1,23 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-export class TextForm extends Component {
-  onSubmit = event => {
-    const form = event.target;
-    event.preventDefault();
-    this.props.onSubmit(form.input.value);
-    form.reset();
-  };
 
-  render() {
+export const TextForm = (props)=>{
+    const onSubmit =(event)=>{
+        const form = event.target;
+        event.preventDefault();
+        props.onSubmit(form.input.value);
+        form.reset();
+    }
+
     return (
-      <form onSubmit={this.onSubmit} ref={node => (this.form = node)}>
-        <input
-          type="text"
-          className="TextForm__input"
-          name="input"
-          placeholder={this.props.placeholder}
-        />
-      </form>
-    );
-  }
+        <form onSubmit={onSubmit} >
+          <input
+            type="text"
+            className="TextForm__input"
+            name="input"
+            placeholder={props.placeholder}
+          />
+        </form>
+      );
 }
+

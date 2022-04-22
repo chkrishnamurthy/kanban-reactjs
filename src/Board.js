@@ -1,7 +1,6 @@
 import React from "react";
 import { Column } from "./Column";
 import { DraggableCard } from "./Card";
-// import { TextForm } from "./TextForm";
 
 export function Board({
   cards,
@@ -46,9 +45,7 @@ export function Board({
             )}
           </Column>
         ))}
-      {/* <div className="Column">
-        <TextForm onSubmit={addColumn} placeholder="Add Column..." />
-      </div> */}
+     
     </div>
   );
 }
